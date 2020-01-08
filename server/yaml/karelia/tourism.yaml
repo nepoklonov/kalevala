@@ -1,0 +1,43 @@
+---
+- name: Столица Карелии – Петрозаводск
+  link: http://www.ticrk.ru/regions/region/settlement/?PID=7519&ID=7735
+  photo: Stolitsa-Petrozavodsk.jpg
+- name: Остров Кижи
+  link: http://www.ticrk.ru/putevoditel/dostoprimechatelnosti-karelii/istoriko-kulturnye-dostoprimechatelnosti-karelii/kizhi/
+  photo: Ostrov_Kizhi2.jpg
+- name: Кижское ожерелье
+  link: http://www.ticrk.ru/putevoditel/dostoprimechatelnosti-karelii/istoriko-kulturnye-dostoprimechatelnosti-karelii/kizhi/kizhskoe-ozherele/index.php
+  photo: Kizhskoe_ozherelye.jpg
+- name: Валаам (Валаамский монастырь)
+  link: http://www.ticrk.ru/putevoditel/dostoprimechatelnosti-karelii/istoriko-kulturnye-dostoprimechatelnosti-karelii/spaso-preobrazhenskiy-valaamskiy-monastyr/index.php
+  photo: Valaam.jpg
+- name: Соловки (Соловецкие острова)
+  link: http://www.ticrk.ru/putevoditel/dostoprimechatelnosti-karelii/istoriko-kulturnye-dostoprimechatelnosti-karelii/solovetskie-ostrova-arkhangelskaya-oblast/index.php
+  photo: Solovki.jpg
+- name: Курорт «Марциальные воды»
+  link: http://www.ticrk.ru/regions/region/sights/sight/?PID=7508&ID=17102
+  photo: Martsialnye_vody.jpg
+- name: Водопад Кивач
+  link: http://www.ticrk.ru/regions/region/sights/sight/?PID=7508&ID=17090
+  photo: Vodopad_Kivach.jpg
+- name: Петроглифы
+  link: http://www.ticrk.ru/regions/region/sights/sight/?PID=7516&ID=16975
+  photo: Petroglify.jpg
+- name: Сейды
+  link: http://www.ticrk.ru/putevoditel/dostoprimechatelnosti-karelii/istoriko-kulturnye-dostoprimechatelnosti-karelii/arkhipelag-kuzova/
+  photo: Seydy.jpg
+- name: Рускеальский мраморный карьер
+  link: http://www.ticrk.ru/regions/region/sights/sight/?PID=7521&ID=17094
+  photo: Russkealskiy_mramorny.jpg
+- name: Поселок Калевала
+  link: http://www.ticrk.ru/regions/region/settlement/?PID=7506&ID=7556
+  photo: Poselok_Kalevala.jpg
+- name: Ладожское озеро
+  link: http://www.ticrk.ru/o-karelii/photo_report/detail/index.php?ID=13695
+  photo: Ladozhskoe_ozero.jpg
+- name: Важеозерский монастырь
+  link: http://www.ticrk.ru/regions/region/sights/sight/?PID=7513&ID=17087
+  photo: Vazheozerskiy_monastyr.jpg
+- name: Муромский монастырь
+  link: http://www.ticrk.ru/regions/region/sights/sight/?PID=7516&ID=17084
+  photo: Muromskiy_monastyr.jpg

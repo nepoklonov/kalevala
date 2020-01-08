@@ -1,0 +1,258 @@
+---
+positions:
+  - Автор и руководитель Этнофестиваля
+  - Руководители региональных отделений
+  - Программный комитет
+  - Кураторы конкурсной программы
+  - Кураторы научно-деловой программы
+  - Кураторы концертной программы
+  - Международное и межрегиональное сотрудничество
+  - Волонтерский корпус
+  - PR
+  - IT-служба, работа сайта
+team:
+  - position: '0'
+    fullName: Головачев Владимир Сергеевич
+    picture: golovachev.jpg
+    description: Художник, директор Центра творческого проектирования «Музеон», член
+      Русского Географического Общества
+    email: vladgolovachev@yandex.ru
+    phone: ''
+    vk: https://vk.com/vladimir.golovachev
+    fb: https://www.facebook.com/vl.golovachev
+    insta: https://www.instagram.com/vl.golovachev
+  - position: '1'
+    fullName: Горина Ирина Владимировна
+    picture: gorina.jpg
+    description: Руководитель Mосковского городского отделения
+    email: gorina.sb@yandex.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '1'
+    fullName: Ситникова Валентина Ивановна
+    picture: sitnikova.jpg
+    description: Руководитель Санкт-Петербургского городского отделения
+    email: valentina_60_07@mail.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '1'
+    fullName: Ватагина Марина Вениаминовна
+    picture: vatagina.jpg
+    description: Руководитель Ленинградского городского отделения
+    email: agro_pushkin@mail.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '1'
+    fullName: Макарова Елизавета Валерьевна
+    picture: makarova.jpg
+    description: Руководитель Петрозаводского городского отделения
+    email: lizyka28@yandex.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '2'
+    fullName: Довгалев Михаил Иванович
+    picture: dovgalev.jpg
+    description: председатель правления МОО «Карельское Содружество»
+    email: Mihail.dovgalev@yandex.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '2'
+    fullName: Юшко Антон Алексеевич
+    picture: yushko.jpg
+    description: руководитель комиссии экоэффективного туризма Ленинградского областного
+      отделения РГО
+    email: yushko.an@gmail.com
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '2'
+    fullName: Орлова Ольга Анатольевна
+    picture: orlova.jpg
+    description: генеральный директор ГБУК г. Москвы «ЦБС ЗАО»
+    email: info@bibliozao.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '2'
+    fullName: Жукова Галина Евгеньевна
+    picture: zhukova.jpg
+    description: член Экспертного совета по дошкольному образованию ГД ФС РФ
+    email: gitl@mail.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '2'
+    fullName: Суворова Виктория Николаевна
+    picture: suvorova.jpg
+    description: 'куратор программ Этнофестиваля «Земля Калевалы» в Москве '
+    email: footballgirl@mail.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '3'
+    fullName: Симкина Ирина Сергеевна
+    picture: simkina.jpg
+    description: куратор фотоконкурса «Лики земли карельской»
+    email: rnsimkina@gmail.com
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '3'
+    fullName: Горшенина Таисия Тимофеевна
+    picture: gorshenina.jpg
+    description: куратор конкурс детского творчества «Калевала – страна солнца»
+    email: tasicoshka53@gmail.com
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '3'
+    fullName: Юшко Антон Алексеевич
+    picture: yushko.jpg
+    description: 'куратор конкурса представителей туриндустрии «ЭТНОтур» '
+    email: yushko.an@gmail.com
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '3'
+    fullName: Сергеева Виктория Сергеевна
+    picture: sergeeva.jpg
+    description: 'куратор конкурса молодых дизайнеров «ЭТНОмотив» '
+    email: svsergeeva0601@mail.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '4'
+    fullName: Кононова Мария Юрьевна
+    picture: kononova.jpg
+    description: куратор научно-деловой программы (международные участники)
+    email: maria.kononova.2013@gmail.com
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '4'
+    fullName: Юшко Антон Алексеевич
+    picture: yushko.jpg
+    description: куратор научно-деловой программы (Санкт-Петербург, Республика Карелия)
+    email: yushko.an@gmail.com
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '4'
+    fullName: Жукова Галина Евгеньевна
+    picture: zhukova.jpg
+    description: куратор научно-деловой программы (Москва, Московская область)
+    email: gitl@mail.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '4'
+    fullName: Горина Ирина Владимировна
+    picture: gorina.jpg
+    description: куратор научно-деловой программы (Москва)
+    email: gorina.sb@yandex.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '5'
+    fullName: Нурыева Валерия Николаевна
+    picture: nuryeva.jpg
+    description: режиссёр концертной программы
+    email: v.nuryeva@mail.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '5'
+    fullName: Слепченко Ирина Владимировна
+    picture: slepchenko.jpg
+    description: 'режиссёр церемониальной части '
+    email: I.slepchenko@yandex.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '6'
+    fullName: Кононова Мария Юрьевна
+    picture: kononova.jpg
+    description: Модератор научно-деловой программы
+    email: maria.kononova.2013@gmail.com
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '6'
+    fullName: Рябинина Евгения Павловна
+    picture: ryabinina.jpg
+    description: ''
+    email: R.evgeniia@yandex.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '7'
+    fullName: Романова Елизавета Игоревна
+    picture: romanova.jpg
+    description: руководитель волонтерского корпуса
+    email: b92927514@gmail.com
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '8'
+    fullName: Ревенко Яна Александровна
+    picture: revenko.jpg
+    description: руководитель пресс-службы
+    email: ya_revenko@mail.ru
+    phone: 8-(951)-986-36-75
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '8'
+    fullName: Михалева Полина Николаевна
+    picture: mikhaljova.jpg
+    description: руководитель PR-службы
+    email: Polinamikhaljova11@gmail.com
+    phone: 8-(981)-860-99-74
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '9'
+    fullName: Ухатов Александр Александрович
+    picture: uhatov.jpg
+    description: ''
+    email: uhatov007@yandex.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''
+  - position: '9'
+    fullName: Непоклонов Иван Сергеевич
+    picture: nepoklonov.jpg
+    description: ''
+    email: i.s.nepoklonov@yandex.ru
+    phone: ''
+    vk: ''
+    fb: ''
+    insta: ''

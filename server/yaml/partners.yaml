@@ -1,0 +1,48 @@
+---
+orgs:
+  - name: Министерство культуры Карелии
+    logo: mincultrk.png
+    link: http://mincultrk.ru/
+  - name: Комитет по межнациональным
+    logo: kmormp.png
+    link: https://www.gov.spb.ru/gov/otrasl/kmormp/
+  - name: Дом Национальностей
+    logo: spbdn.png
+    link: http://spbdn.ru/
+  - name: Карельское содружество
+    logo: sodryzestvo_karelia.png
+    link: https://vk.com/sodryzestvo_karelia
+  - name: Комиссия+экотуризмаРГО
+    logo: leningradskoe-oblastnoe-otdelenie.png
+    link: https://www.rgo.ru/ru/leningradskoe-oblastnoe-otdelenie
+  - name: Проект новая школа
+    logo: novaya_shkola.png
+    link: https://proekty.er.ru/node/6592
+partners:
+  - name: Центр финно-угорских народов
+    logo: finnougoria.jpg
+    link: http://www.finnougoria.ru/
+  - name: Корпорация_развития_РК
+    logo: kr-rk.jpg
+    link: https://kr-rk.ru/
+  - name: Библиотека западного округа
+    logo: bibliozao.jpg
+    link: https://bibliozao.ru/
+  - name: Молодежное правительство Республики Карелия
+    logo: prav10.jpg
+    link: https://vk.com/mol.prav10
+  - name: Молодежная коллкегия СПб
+    logo: mcollegia.jpg
+    link: https://mcollegia.ru/team
+  - name: Молодежное правительство СПб
+    logo: molprav47.jpg
+    link: https://molprav47.ru/mplo-list
+  - name: МИР
+    logo: mir_russia.jpg
+    link: https://vk.com/mir_russia
+  - name: Университет технологии и дизайна
+    logo: sutd.jpg
+    link: http://sutd.ru/
+  - name: Волонтеры СПб
+    logo: volonteerspb.jpg
+    link: https://vk.com/volonteerspb
