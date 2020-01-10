@@ -20,19 +20,18 @@ import kalevala.common.models.CWJoin
 import kalevala.common.models.InputField
 import kalevala.common.models.ParticipantFile
 import kalevala.common.models.participants.EthnoMotiveParticipant
+import kalevala.common.models.participants.FormType
 import kalevala.common.models.participants.OrganizeParticipant
 import kalevala.server.Level
 import kalevala.server.UserSession
-import kalevala.server.database.createModel
-import kalevala.server.database.getModelTable
-import kalevala.server.database.loggedTransaction
-import kalevala.server.database.startDB
+import kalevala.server.database.*
 import kotlinx.css.h1
 import kotlinx.html.body
 import kotlinx.html.h1
 import kotlinx.html.h2
 import kotlinx.serialization.list
 import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import javax.xml.validation.Schema
@@ -95,7 +94,7 @@ fun Route.startAdminGetFileByIdAPI() = adminListenAndAutoRespond<Request.AdminGe
 }
 
 fun Route.startTasksAPI() {
-    get("/admin/tasks/!1") {
+    get("/admin/tasks/!0") {
         call.respondHtml {
             body {
                 if (isAdmin()) {
@@ -103,15 +102,19 @@ fun Route.startTasksAPI() {
                         +"Welcome to the Task Center"
                     }
                     loggedTransaction {
-                        val t = OrganizeParticipant::class.getModelTable()
-                        t.run {
-                            exec(varchar("description", 255).dropStatement().first())
+                        FormType.values().map {
+                            it.klass.getModelTable()
+                        }.map { table ->
+                            table.model.fields.forEach { field ->
+                                if (field.type == ModelFieldType.STRING || field.type == ModelFieldType.TEXT) {
+                                    this.exec(table.getColumn(field.name).modifyStatement()[0])
+                                }
+                            }
                         }
-
                     }
-                    h2 {
-                        +"[Done]"
-                    }
+                }
+                h2 {
+                    +"[Done]"
                 }
             }
         }

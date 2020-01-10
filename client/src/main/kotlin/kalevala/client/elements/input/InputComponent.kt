@@ -33,6 +33,7 @@ interface InputItemProps : RProps {
 interface InputItemState : RState {
     var value: String
     var isEmpty: Boolean
+    var isLoading: Boolean
     var isCorrect: Boolean
     var isIncorrect: Boolean
 }
@@ -77,6 +78,7 @@ abstract class InputComponent<T : InputItemState> : RComponent<InputItemProps, T
 
     init {
         state.isEmpty = true
+        state.isLoading = false
         state.isCorrect = false
         state.isIncorrect = false
         state.value = ""

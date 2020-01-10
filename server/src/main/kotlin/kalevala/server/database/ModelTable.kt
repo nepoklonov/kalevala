@@ -19,7 +19,7 @@ class ModelTable<T : Any>(val model: Model<T>) : Table(model.kClass.simpleName!!
             when (it.type) {
                 ModelFieldType.INT -> integer(it.name).apply { if (!it.nullable) default(Int.MIN_VALUE) }
                 ModelFieldType.BOOLEAN -> bool(it.name).apply { if (!it.nullable) default(false) }
-                ModelFieldType.STRING -> varchar(it.name, 255).apply { if (!it.nullable) default("") }
+                ModelFieldType.STRING -> varchar(it.name, 2000).apply { if (!it.nullable) default("") }
                 ModelFieldType.TEXT -> text(it.name).apply { if (!it.nullable) default("") }
                 ModelFieldType.HIDDEN -> null
             }?.run {

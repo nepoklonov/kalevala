@@ -59,16 +59,21 @@ class FileInputComponent : InputComponent<FileInputState>() {
                 autoComplete = false
                 id = "input-" + props.name
                 onChangeFunction = {
+                    setState {
+                        isLoading = true
+                    }
                     commonOnChange(it)
                     (it.target as HTMLInputElement).files?.get(0)?.let { file ->
                         val jsFile = JSFile(props.name, file, randomString(10))
                         val fileType = if (props.name.startsWith("imageFileId")) FileType.Image else FileType.Other
                         val fileData = FileData(fileType, file.name, props.time)
+
                         Request.FileUpload(props.formType, fileData).send(Int.serializer(), listOf(jsFile)) { index ->
 
                             val fileName = index.toString()
                             props.valueUpdate(props.name, fileName)
                             setState {
+                                isLoading = false
                                 value = fileName
                                 isEmpty = fileName.isEmpty()
                                 isCorrect = props.validation(value)
@@ -91,6 +96,9 @@ class FileInputComponent : InputComponent<FileInputState>() {
                         isIncorrect = !isCorrect
                     }
                 }
+                onClickFunction = {
+                    if (state.isLoading || !state.isEmpty) it.preventDefault()
+                }
             }
             css {
                 display = Display.none
@@ -105,7 +113,7 @@ class FileInputComponent : InputComponent<FileInputState>() {
             alignItems = Align.center
             textAlign = TextAlign.center
             fontSize = 12.pt
-            if (type) cursor = Cursor.pointer
+            if (type && !state.isLoading) cursor = Cursor.pointer
             border(1.px, BorderStyle.solid, gray50Color)
             height = if (type) 50.px else 80.px
         }
@@ -119,7 +127,7 @@ class FileInputComponent : InputComponent<FileInputState>() {
                     attrs.onMouseOverFunction = mouseIn(true)
                     attrs.onMouseOutFunction = mouseIn(false)
                 }
-                cursor = Cursor.pointer
+                if (!state.isLoading) cursor = Cursor.pointer
                 width = 30.px
                 height = 30.px
                 margin(10.px, 15.px)
@@ -130,11 +138,11 @@ class FileInputComponent : InputComponent<FileInputState>() {
                 backgroundSize = "60%"
                 backgroundPosition = "center center"
                 backgroundImage = Image("url('/images/design/exit.png')")
-                opacity = if (state.moused) 1 else 0.4
+                opacity = if (state.moused && !state.isLoading) 1 else 0.4
                 transform { if (type) rotate(45.deg) }
             }
             attrs.onClickFunction = {
-                if (!type) {
+                if (state.isLoading) it.preventDefault() else if (!type) {
                     it.preventDefault()
                     setState {
                         isEmpty = true
@@ -170,10 +178,10 @@ class FileInputComponent : InputComponent<FileInputState>() {
                         color = Color.darkRed
                     }
                 }
-                if (state.isEmpty) {
-                    +props.title
-                } else {
-                    +"Файл загружен"
+                when {
+                    state.isLoading -> +"Идёт загрузка, не закрывайте страницу"
+                    state.isEmpty -> +props.title
+                    else -> +"Файл загружен"
                 }
             }
         }

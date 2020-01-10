@@ -12,8 +12,8 @@ data class OrganizeParticipant (
     @Display(3,"Название мероприятия")
     val actionName: String,
 
-    @SaveToTable
-    @Display(4,"Краткое описание мероприятия")
+    @SaveToTable(longText = true)
+    @Display(4,"Краткое описание мероприятия", validation = Validation.LongText)
     val actionDescription: String,
 
     @SaveToTable
