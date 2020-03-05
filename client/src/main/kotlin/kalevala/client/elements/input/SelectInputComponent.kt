@@ -37,7 +37,7 @@ class SelectInputComponent : InputComponent<InputItemState>() {
                         isIncorrect = !isCorrect
                     }
                 }
-                this["value"] = if (state.value == "") "-1" else state.value
+                this["value"] = if (state.value == "") if (props.value == "") "-1" else props.value else state.value
             }
             styledOption {
                 attrs.value = "-1"

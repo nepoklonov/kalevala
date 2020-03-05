@@ -4,7 +4,8 @@ import kalevala.common.div
 import kalevala.common.interpretation.DirRef.Companion.documents
 import kalevala.common.interpretation.DirRef.Companion.images
 import kalevala.common.interpretation.DirRef.Companion.root
-import kalevala.common.interpretation.ScaleType.*
+import kalevala.common.interpretation.ScaleType.INSIDE
+import kalevala.common.interpretation.ScaleType.OUTSIDE
 import kalevala.common.models.participants.FormType
 import kotlinx.serialization.Serializable
 
@@ -125,14 +126,15 @@ object ImageDirs {
 object Images {
     val mainBackground: Image<SingleScale> =
         Image(ImageDirs.design file "back.png", scaleOutsideByHeight(918))
-    val mainLogo: Image<SingleScale> =
-        Image(ImageDirs.design file "main-logo.png", 80 x 80 put INSIDE)
-    val mainTitle: Image<SingleScale> =
-        Image(ImageDirs.design file "title.png", 440 x 42 put INSIDE)
     val bear: Image<SingleScale> =
         Image(ImageDirs.design file "bear.png", 30 x 40 put INSIDE)
     val oldKarel: Image<SingleScale> =
         Image(ImageDirs.design file "old-karel.png", 70 x 120 put INSIDE)
+}
+
+object SVGImages {
+    val mainLogo = SVGImage(ImageDirs.design file "main-logo.svg")
+    val mainTitle = SVGImage(ImageDirs.design file "title.svg")
 }
 
 object Pages {
@@ -155,7 +157,6 @@ object Pages {
     val join = root / "join"
 
     object Join {
-        val contests = join / "contests"
         val ethnoTour = join / "ethno-tour"
         val faces = join / "faces"
         val sunCountry = join / "sun-country"

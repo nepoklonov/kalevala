@@ -51,6 +51,7 @@ class GalleryComponent(props: PageProps) : StandardPageComponent<YamlListState<F
                 infoBlock = { it ->
                     styledDiv {
                         css {
+                            width = 300.px
                             padding(20.px)
                             fontSize = 16.pt
                         }

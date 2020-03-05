@@ -181,9 +181,6 @@ class JoinComponent(props: PageProps) : StandardPageComponent<JoinState>(props) 
                         }
                     }
                     content = {
-                        css {
-                            overflow = Overflow.auto
-                        }
                         child(Contest::class) {
                             attrs {
                                 formType = getFormType(state.addType)

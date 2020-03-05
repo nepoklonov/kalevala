@@ -1,12 +1,14 @@
 package kalevala.common
 
-import kalevala.common.interpretation.*
+import kalevala.common.interpretation.FileRef
+import kalevala.common.interpretation.Scale
+import kalevala.common.interpretation.YamlRef
 import kalevala.common.models.InputField
+import kalevala.common.models.participants.FormType
 import kotlinx.serialization.ImplicitReflectionSerializer
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.serializer
-import kalevala.common.models.participants.FormType
-import kotlinx.serialization.KSerializer
 import kotlin.reflect.KClass
 
 enum class Method(val methodName: String, val fileTransfer: Boolean = false) {
@@ -87,10 +89,10 @@ sealed class Request(val method: Method) {
     }
 
     @Serializable
-    class FormSend(val formType: FormType, val list: List<InputField>) : Request(Method.FormSend)
+    class FormSend(val formType: FormType, val list: List<InputField>, val id: Int? = null) : Request(Method.FormSend)
 
     @Serializable
-    class GetModel(val formName: FormType): Request(Method.GetModel)
+    class GetModel(val formName: FormType, val id: Int? = null) : Request(Method.GetModel)
 
     @Serializable
     class GetGeneralInfo: Request(Method.GetGeneralInfo)

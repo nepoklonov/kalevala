@@ -1,6 +1,8 @@
 package kalevala.common.models
 //
-import kalevala.common.*
+import kalevala.common.DisplayType
+import kalevala.common.OwnType
+import kalevala.common.Validation
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -13,7 +15,10 @@ data class InputField(
     val ownType: OwnType = OwnType.None,
     val ownParams: List<String> = listOf(),
     val width: Int = 100,
-    val options: List<String> = listOf()
+    val options: List<String> = listOf(),
+    var value: String = ""
 ) {
-    var value: String = if (type == DisplayType.CheckBox) "false" else ""
+    init {
+        if (type == DisplayType.CheckBox) value = "false"
+    }
 }

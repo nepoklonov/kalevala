@@ -28,6 +28,7 @@ interface InputItemProps : RProps {
     var enable: Boolean
     var options: List<String>
     var forceChecked: Boolean
+    var value: String
 }
 
 interface InputItemState : RState {
@@ -84,6 +85,15 @@ abstract class InputComponent<T : InputItemState> : RComponent<InputItemProps, T
         state.value = ""
     }
 
+    override fun componentDidMount() {
+        if (props.value != "" && props.type != DisplayType.File) setState {
+            value = props.value
+            isEmpty = value.isEmpty()
+            isCorrect = props.validation(value)
+            isIncorrect = !isCorrect
+        }
+    }
+
     override fun componentDidUpdate(prevProps: InputItemProps, prevState: T, snapshot: Any) {
         //TODO(костыль убрать)
         if (props.type == DisplayType.CheckBox && state.value == "") {
@@ -105,9 +115,7 @@ abstract class InputComponent<T : InputItemState> : RComponent<InputItemProps, T
             }
 
             containerBody()
-
             inputBody()
-
             label()
         }
     }

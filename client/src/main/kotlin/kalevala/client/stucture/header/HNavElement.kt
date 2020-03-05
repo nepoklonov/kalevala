@@ -1,12 +1,13 @@
-package kalevala.client.stucture
+package kalevala.client.stucture.header
 
 import kalevala.client.*
-import kalevala.client.elements.image.scaledImage
+import kalevala.client.elements.image.svgImage
 import kalevala.common.interpretation.getSectionIcon
+import kalevala.common.interpretation.x
 import kotlinx.css.*
-import kotlinx.css.properties.borderLeft
 import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.DIV
+import kotlinx.html.classes
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 import org.w3c.dom.asList
@@ -24,7 +25,8 @@ interface HNavProps : RProps {
 
 interface HNavState : RState {
     var selected: Boolean
-    var lineLength: Pair<Double, Double>
+    var links: List<Double>
+    var sectionTopHeight: Double
 }
 
 class HNavElement : RComponent<HNavProps, HNavState>() {
@@ -35,7 +37,8 @@ class HNavElement : RComponent<HNavProps, HNavState>() {
 
     init {
         state.selected = false
-        state.lineLength = 0.0 to 0.0
+        state.links = listOf()
+        state.sectionTopHeight = 0.0
     }
 
     private fun StyledDOMBuilder<CommonAttributeGroupFacade>.addSelectListener() {
@@ -59,20 +62,11 @@ class HNavElement : RComponent<HNavProps, HNavState>() {
         }
         styledDiv {
             css {
-                color = color2
-                margin(0.px, 5.px)
-            }
-            +"\u25C6"
-        }
-        styledDiv {
-            css {
-                margin(7.px, 0.px)
+                position = Position.relative
+                zIndex = 2
+                margin(7.px, 0.px, 7.px, 25.px)
                 children("a") {
                     +MainStyles.normalA
-                    color = Color.black
-                    hover {
-                        color = Color.darkSlateBlue
-                    }
                 }
                 if (to == props.current) +MainStyles.current
             }
@@ -89,16 +83,15 @@ class HNavElement : RComponent<HNavProps, HNavState>() {
                 marginBottom = 5.px
                 justifySelf = JustifySelf.center
             }
-            scaledImage(getSectionIcon(props.section.self.ref.name)) {
+            svgImage(getSectionIcon(props.section.self.ref.name), 100 x 70) {
                 addSelectListener()
             }
         }
         styledDiv {
             ref { node ->
-                if (node != undefined && props.section.pages.isNotEmpty()) {
-                    val newLineLength = (node as Element).getBoundingClientRect().height / 2
-                    if (state.lineLength.first != newLineLength) setState {
-                        lineLength = lineLength.copy(first = newLineLength)
+                if (node != undefined) {
+                    (node as Element).getBoundingClientRect().height.let {
+                        if (state.sectionTopHeight != it) setState { sectionTopHeight = it }
                     }
                 }
             }
@@ -113,30 +106,14 @@ class HNavElement : RComponent<HNavProps, HNavState>() {
                 textAlign = TextAlign.center
             }
             if (shouldBeOpened) {
-                styledDiv {
-                    css {
-                        fontSize = 22.px
-                        position = Position.absolute
-                        left = 2.4.px
-                        color = getPageColor(props.section.self.ref, true)
-                    }
-                    +"\u25C6"
-                }
-                styledDiv {
-                    css {
-                        position = Position.absolute
-                        borderLeft(1.px, BorderStyle.solid, getPageColor(props.section.self.ref, true))
-                        height = state.lineLength.run { first + second }.toInt().px
-                        top = 16.px
-                        left = 11.1.px
-                    }
-                }
+                topLine(getPageColor(props.section.self.ref, true).toColor(), state.sectionTopHeight, state.links.isNotEmpty())
             }
             styledDiv {
                 css {
                     width = 70.pct
                     fontWeight = FontWeight.bold
                     child("a") {
+                        +MainStyles.normalA
                         fontWeight = FontWeight.bold
                     }
                     textAlign = TextAlign.center
@@ -148,35 +125,37 @@ class HNavElement : RComponent<HNavProps, HNavState>() {
             }
         }
         styledDiv {
+            if (state.links.isNotEmpty() && shouldBeOpened)
+                bottomLine(getPageColor(props.section.self.ref, true).toColor(), state.links)
             css {
+                position = Position.relative
                 if (!isMain) height = 0.px
             }
             styledDiv {
+                attrs.classes += "h-" + props.section.self.ref.name
                 if (shouldBeOpened) {
                     addSelectListener()
                     css {
                         if (isMain) height = 100.pct
                         paddingRight = 5.px
-                        backgroundColor = getPageColor(props.section.self.ref, false)
+                        backgroundColor = getPageColor(props.section.self.ref, false).toColor()
                     }
                     if (props.section.pages.isNotEmpty()) {
                         ref { node ->
                             if (node != undefined) {
-                                val links = (node as Node).childNodes.asList()
-                                val newLineLength = links.sumByDouble { e ->
-                                    (e as Element).getBoundingClientRect().height.let {
-                                        if (links.indexOf(e) == links.lastIndex) it / 2 else it
-                                    }
+                                val links = (node as Node).childNodes.asList().map {
+                                    (it as Element).getBoundingClientRect().run { top + height / 2 } -
+                                        (node as Element).getBoundingClientRect().top
                                 }
-                                if (state.lineLength.second != newLineLength) setState {
-                                    lineLength = lineLength.copy(second = newLineLength)
+                                if (state.links != links) setState {
+                                    this.links = links
                                 }
                             }
                         }
                     }
                     props.run { content() }
                     props.section.pages.forEach {
-                        divLink(getPageColor(props.section.self.ref, true), it.url, it.title)
+                        divLink(getPageColor(props.section.self.ref, true).toColor(), it.url, it.title)
                     }
                 }
             }

@@ -1,8 +1,9 @@
 package kalevala.common.interpretation
 
-import kotlinx.serialization.enumMembers
-import kalevala.common.interpretation.ScaleType.*
+import kalevala.common.interpretation.ScaleType.INSIDE
+import kalevala.common.interpretation.ScaleType.OUTSIDE
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.enumMembers
 
 @Serializable
 data class PlanarSize(val width: Int, val height: Int) {
@@ -68,5 +69,8 @@ data class Image<out T : ScaleContainer> internal constructor (val original: Fil
     }
 }
 
-fun getSectionIcon(name: String): Image<SingleScale> =
-    Image(ImageDirs.design / "pages" file name dot "png", 100 x 70 put INSIDE)
+@Serializable
+data class SVGImage(val fileRef: FileRef)
+
+fun getSectionIcon(name: String) =
+    SVGImage(ImageDirs.design / "pages" file name dot "svg")

@@ -3,7 +3,10 @@ package kalevala.client.elements.frames
 import kalevala.client.FrameComponent
 import kalevala.client.FrameProps
 import kotlinx.css.*
-import react.*
+import react.RBuilder
+import react.RComponent
+import react.RProps
+import react.RState
 import styled.css
 import styled.styledDiv
 
@@ -19,12 +22,13 @@ class BigImage : RComponent<BigImageProps, BigImageState>() {
     private val imageContent = fun RBuilder.() {
         styledDiv {
             css {
+                backgroundColor = rgba(0, 0, 0, 0.8)
                 backgroundImage = Image("url('${props.src}')")
                 backgroundRepeat = BackgroundRepeat.noRepeat
-                backgroundSize = "cover"
+                backgroundSize = "contain"
                 backgroundPosition = "center center"
-                width = 500.px
-                height = 500.px
+                width = 60.vw
+                height = 100.pct
             }
         }
         (props.infoBlock)()
@@ -35,8 +39,8 @@ class BigImage : RComponent<BigImageProps, BigImageState>() {
         child<FrameProps, FrameComponent> {
             attrs.close = props.close
             attrs.content = imageContent
-            attrs.width = 800.px
-            attrs.height = 500.px
+            attrs.width = LinearDimension.auto
+            attrs.height = 90.pct
         }
     }
 

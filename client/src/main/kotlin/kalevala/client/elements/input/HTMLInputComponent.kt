@@ -4,11 +4,8 @@ import kalevala.client.gray50Color
 import kotlinx.css.*
 import kotlinx.css.properties.borderBottom
 import kotlinx.html.DIV
-import kotlinx.html.InputType
 import kotlinx.html.LABEL
 import kotlinx.html.id
-import kotlinx.html.js.onBlurFunction
-import kotlinx.html.js.onChangeFunction
 import react.RClass
 import react.RProps
 import react.dom.div
@@ -16,9 +13,7 @@ import react.setState
 import styled.StyledDOMBuilder
 import styled.css
 import styled.styledDiv
-import styled.styledInput
 import kotlin.browser.document
-import kotlin.browser.localStorage
 
 external interface CKEditorProps : RProps {
     var editor: dynamic
@@ -65,7 +60,7 @@ class HTMLInputComponent : InputComponent<InputItemState>() {
             attrs.id = "input-" + props.name
             CKEditor {
                 attrs.editor = DecoupledEditor
-                attrs.data = ""
+                attrs.data = props.value
                 attrs.config = js("""{
                         placeholder: '',
                         toolbar: [ 'bold', 'italic', 'link' ]

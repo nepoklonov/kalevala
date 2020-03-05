@@ -1,12 +1,13 @@
 package kalevala.client.stucture
 
 import kalevala.client.PageClass
+import kalevala.client.RoutedProps
+import kalevala.client.stucture.header.HeaderComponent
 import kotlinx.css.*
 import kotlinx.html.id
 import react.RBuilder
 import react.RComponent
 import react.RState
-import kalevala.client.RoutedProps
 import styled.css
 import styled.styledDiv
 

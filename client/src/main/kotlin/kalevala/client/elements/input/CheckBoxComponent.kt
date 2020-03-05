@@ -25,6 +25,7 @@ class CheckBoxInputComponent : InputComponent<InputItemState>() {
     override fun StyledDOMBuilder<DIV>.inputBody() {
         styledInput(type = InputType.checkBox, name = props.name) {
             attrs {
+                checked = props.value.toBoolean()
                 onChangeFunction = {
                     commonOnChange(it)
                     setState {

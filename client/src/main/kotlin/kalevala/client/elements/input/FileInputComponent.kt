@@ -41,6 +41,23 @@ class FileInputComponent : InputComponent<FileInputState>() {
         state.miniFile = ""
     }
 
+    override fun componentDidMount() {
+        if (props.value.toIntOrNull()?.let { it > -1 } == true) {
+            Request.ParticipantsImagesGetVersion(props.value.toInt(), 120 x 80 put ScaleType.OUTSIDE).send(String.serializer()) {
+                setState {
+                    miniFile = it
+                }
+            }
+        }
+
+        if (props.value.toIntOrNull()?.let { it > 0 } == true) setState {
+            value = props.value
+            isEmpty = value.isEmpty()
+            isCorrect = props.validation(value)
+            isIncorrect = !isCorrect
+        }
+    }
+
     private fun mouseIn(isMouseIn: Boolean): (Event) -> Unit = { _ -> setState { moused = isMouseIn } }
 
     override fun StyledDOMBuilder<DIV>.containerBody() {}

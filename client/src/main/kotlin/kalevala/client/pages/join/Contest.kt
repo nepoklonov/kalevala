@@ -39,6 +39,7 @@ fun getInputClass(displayType: DisplayType) = when (displayType) {
 }
 
 interface ContestProps : RProps {
+    var editId: Int?
     var formType: FormType
     var action: (Answer) -> Unit
 }
@@ -75,7 +76,7 @@ class Contest(props: ContestProps) : RComponent<ContestProps, ContestState>(prop
 
     override fun componentDidMount() {
         if (state.formType != props.formType) {
-            Request.GetModel(props.formType).send(InputField.serializer().list) { list ->
+            Request.GetModel(props.formType, props.editId).send(InputField.serializer().list) { list ->
                 setState {
                     formType = props.formType
                     allFields = list.associateBy { it.name }
@@ -108,7 +109,7 @@ class Contest(props: ContestProps) : RComponent<ContestProps, ContestState>(prop
             setState { enable = false }
             if (state.allFields.all { it.value.isValidIfExpected }) {
                 GlobalScope.launch {
-                    val answer = Request.FormSend(props.formType, state.allFields.values.toList()).send().parseAnswer()
+                    val answer = Request.FormSend(props.formType, state.allFields.values.toList(), props.editId).send().parseAnswer()
                     if (props.action == undefined) {
                         if (answer.parseBody(String.serializer()) == "ok") {
                             setState {
@@ -254,6 +255,7 @@ class Contest(props: ContestProps) : RComponent<ContestProps, ContestState>(prop
                     a.enable = state.enable
                     a.options = it.options
                     a.forceChecked = state.forceChecked
+                    a.value = it.value
                 }
             }
         }

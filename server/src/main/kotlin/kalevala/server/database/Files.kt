@@ -93,7 +93,7 @@ fun getImageVersion(fileId: Int, scale: Scale) = loggedTransaction {
     chooseBestImageVersionSize(versionSizes, mainRef, scale).path
 }
 
-fun getAllImages(formType: FormType, scale: Scale, bigScale: Scale = 500 x 500 put ScaleType.INSIDE): List<FileAnswer> = loggedTransaction {
+fun getAllImages(formType: FormType, scale: Scale, bigScale: Scale = 1000 x 700 put ScaleType.INSIDE): List<FileAnswer> = loggedTransaction {
     val participants = formType.klass.getModelTable()
     val files = ParticipantFile::class.getModelTable()
     val imageVersions = ImageVersion::class.getModelTable()

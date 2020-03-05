@@ -8,10 +8,7 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.statements.InsertStatement
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
-import kotlin.reflect.full.allSuperclasses
-import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.memberProperties
-import kotlin.reflect.full.superclasses
 
 class ModelTable<T : Any>(val model: Model<T>) : Table(model.kClass.simpleName!!) {
     init {
@@ -68,8 +65,10 @@ class ModelTable<T : Any>(val model: Model<T>) : Table(model.kClass.simpleName!!
         return get(property.name)
     }
 
-    inline fun selectModels(where: SqlExpressionBuilder.() -> Op<Boolean>): List<T> {
-        return select(where).map { it.toModel() }
+    inline fun selectModels(where: SqlExpressionBuilder.(ModelTable<T>) -> Op<Boolean>): List<T> {
+        return select {
+            where(this@ModelTable)
+        }.map { it.toModel() }
     }
 
     fun selectAllModels(): List<T> {

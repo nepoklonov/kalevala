@@ -17,14 +17,15 @@ import kalevala.common.interpretation.Pages
 import kalevala.common.models.participants.FormType
 import kalevala.server.Level
 import kalevala.server.UserSession
-import kalevala.server.api.join.*
+import kalevala.server.api.join.startFileUploadAPI
+import kalevala.server.api.join.startFormSendAPI
+import kalevala.server.api.join.startGetModelAPI
 import kalevala.server.database.fier
 import kalevala.server.database.getAmount
 import kalevala.server.database.getCities
 import kalevala.server.liveFile
 import kotlinx.io.IOException
 import kotlinx.serialization.serializer
-import javax.security.auth.login.AppConfigurationEntry
 
 inline fun <reified T : Request> List<PartData>.receiveForm(): T {
     var result: String? = null
@@ -73,11 +74,15 @@ inline fun <reified T : Request> Route.listenAndAutoRespond(method: Method, cros
     } catch (e: IOException) {
         println("f 5928")
         println(e)
-        Answer.ok(Int.serializer(), -5928)
+        respond(Answer.ok(Int.serializer(), -5928))
     } catch (e: IllegalStateException) {
         println("f 5929")
         println(e)
-        Answer.ok(Int.serializer(), -5929)
+        respond(Answer.ok(Int.serializer(), -5929))
+    } catch (e: Exception) {
+        println("ff mda")
+        println(e)
+        respond(Answer.ok(Int.serializer(), -5953))
     }
 }
 

@@ -25,6 +25,7 @@ class TextInputComponent : InputComponent<InputItemState>() {
     override fun StyledDOMBuilder<DIV>.inputBody() {
         styledInput(type = InputType.text, name = props.name) {
             attrs {
+                value = props.value
                 onChangeFunction = {
                     commonOnChange(it)
                     setState {

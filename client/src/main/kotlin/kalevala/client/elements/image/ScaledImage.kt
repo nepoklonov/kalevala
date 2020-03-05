@@ -1,6 +1,5 @@
 package kalevala.client.elements.image
 
-import kalevala.client.parseAnswer
 import kalevala.client.parseAnswerBody
 import kalevala.client.send
 import kalevala.common.Request
@@ -78,3 +77,7 @@ fun <T : ScaleContainer> RBuilder.scaledImage(image: Image<T>, scale: Scale, blo
 fun <T : ScaleContainer> RBuilder.scaledImage(image: Image<T>, scale: T, block: StyledDOMBuilder<DIV>.() -> Unit = { }) = scaledImage(image, scale.scale, block)
 
 fun RBuilder.scaledImage(image: Image<SingleScale>, block: StyledDOMBuilder<DIV>.() -> Unit = { }) = scaledImage(image, image.scales[0], block)
+
+fun RBuilder.svgImage(image: SVGImage, size: PlanarSize, block: StyledDOMBuilder<DIV>.() -> Unit = { }) = imageInDiv(image.fileRef.path, "contain", size.width.px, size.height.px) {
+    block()
+}

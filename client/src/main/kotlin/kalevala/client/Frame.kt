@@ -2,9 +2,11 @@ package kalevala.client
 
 import kotlinx.css.*
 import kotlinx.html.DIV
-import kotlinx.html.article
 import kotlinx.html.js.onClickFunction
-import react.*
+import react.RBuilder
+import react.RComponent
+import react.RProps
+import react.RState
 import styled.StyledDOMBuilder
 import styled.css
 import styled.styledDiv
@@ -29,6 +31,7 @@ class FrameComponent : RComponent<FrameProps, RState>() {
                 width = 100.pct
                 height = 100.pct
                 zIndex = 10
+                overflow = Overflow.auto
             }
             styledDiv {
                 attrs.onClickFunction = {
@@ -51,19 +54,21 @@ class FrameComponent : RComponent<FrameProps, RState>() {
                     zIndex = 11
                     display = Display.flex
                     position = Position.relative
-                    paddingRight = 50.px
+                    overflowY = Overflow.auto
                 }
                 styledDiv {
                     css {
                         position = Position.absolute
-                        right = 0.px
+                        right = (-45).px
+                        //right = 15.px
+                        top = 15.px
                         cursor = Cursor.pointer
                         width = 30.px
                         height = 30.px
                         display = Display.flex
-                        margin(20.px)
                         justifyContent = JustifyContent.center
                         alignItems = Align.center
+                        backgroundColor = rgba(255, 255, 255, 0.5)
                         backgroundRepeat = BackgroundRepeat.noRepeat
                         backgroundSize = "60%"
                         backgroundPosition = "center center"

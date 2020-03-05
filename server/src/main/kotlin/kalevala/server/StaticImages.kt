@@ -6,7 +6,10 @@ import kalevala.common.interpretation.*
 import kalevala.common.models.StaticFile
 import kalevala.common.models.StaticImageVersion
 import kalevala.server.database.*
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.deleteWhere
+import org.jetbrains.exposed.sql.innerJoin
+import org.jetbrains.exposed.sql.select
 import javax.imageio.ImageIO
 import kotlin.reflect.full.memberProperties
 
@@ -119,9 +122,6 @@ fun startImagesConnection() {
     val images = mapOf(
         "images" to Images::class.memberProperties.mapNotNull { property ->
             property(Images).let { if (it is Image<*>) it else null }
-        },
-        "sections" to Pages.sections.map {
-            getSectionIcon(it.name)
         },
         "old" to getImagesFromOld().map {
             ImageDirs.getImageFromDirectory(ImageDirs.old, it)

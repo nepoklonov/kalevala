@@ -3,7 +3,6 @@ package kalevala.server.database
 import kalevala.common.*
 import kalevala.common.models.InputField
 import kotlin.reflect.KClass
-import kotlin.reflect.KProperty
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.memberProperties

@@ -1,14 +1,15 @@
 package kalevala.client.pages
 
 import kalevala.client.FrameComponent
+import kalevala.client.GalleryBox
 import kalevala.client.gray20Color
-import kalevala.client.gray50Color
 import kalevala.client.pages.join.Contest
 import kalevala.client.send
 import kalevala.client.stucture.PageProps
 import kalevala.client.stucture.StandardPageComponent
 import kalevala.client.stucture.YamlListState
 import kalevala.client.stucture.updateYamlListState
+import kalevala.common.FileAnswer
 import kalevala.common.Request
 import kalevala.common.interpretation.ImageDirs
 import kalevala.common.interpretation.YamlRef
@@ -46,12 +47,19 @@ class Greetings(pageProps: PageProps) : StandardPageComponent<GreetingsState>(pa
                     flexWrap = FlexWrap.wrap
                     justifyContent = JustifyContent.spaceBetween
                 }
-                state.yaml.forEach {
-                    styledImg(src = (ImageDirs.greetings file it).path) {
-                        css {
-                            height = 300.px
-                            margin(20.px)
+                child(GalleryBox::class) {
+                    attrs {
+                        content = state.yaml.map {
+                            (ImageDirs.greetings file it).path
+                        }.mapIndexed { index, src ->
+                            FileAnswer(index, src, src)
                         }
+                        horizontalAmount = 5
+                        proportion = 1.424
+                        zoom = 0.8
+                        getImages = { _, _ -> }
+                        current = props.current
+                        infoBlock = { }
                     }
                 }
 

@@ -91,7 +91,7 @@ class GalleryBox : RComponent<GalleryBoxProps, GalleryBoxState>() {
                 width = 100.pct
             }
             tbody {
-                for (i in 0 until props.content.size + props.horizontalAmount step props.horizontalAmount) {
+                for (i in props.content.indices step props.horizontalAmount) {
                     styledTr {
                         css.height = state.imageHeight.px
                         for (j in i until i + props.horizontalAmount) {

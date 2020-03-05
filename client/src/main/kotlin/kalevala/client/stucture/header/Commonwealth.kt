@@ -1,10 +1,9 @@
-package kalevala.client.stucture
+package kalevala.client.stucture.header
 
 import kalevala.common.interpretation.Pages
 import kalevala.common.quote
 import kotlinx.css.*
 import kotlinx.html.DIV
-import react.RBuilder
 import react.router.dom.navLink
 import styled.*
 

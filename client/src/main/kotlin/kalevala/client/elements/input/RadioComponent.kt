@@ -36,6 +36,7 @@ class RadioInputComponent : InputComponent<InputItemState>() {
                             }
                         }
                         value = index.toString()
+                        checked = props.value == value
                         autoComplete = false
                         id = "input-" + props.name + "-$index"
                     }

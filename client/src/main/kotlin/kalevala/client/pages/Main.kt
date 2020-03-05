@@ -1,28 +1,33 @@
 package kalevala.client.pages
 
+import kalevala.client.*
 import kalevala.client.elements.image.imageInDiv
-import kalevala.client.gray50Color
-import kalevala.client.gray70Color
-import kalevala.client.gridArea
-import kalevala.client.gridTemplateAreas
 import kalevala.client.stucture.PageComponent
 import kalevala.client.stucture.PageProps
 import kalevala.client.stucture.PageState
+import kalevala.common.Request
 import kalevala.common.interpretation.ImageDirs
-import kalevala.common.quote
+import kalevala.common.interpretation.Pages
+import kalevala.common.models.NewsWithSrc
 import kotlinx.css.*
 import kotlinx.css.LinearDimension.Companion.auto
 import kotlinx.css.properties.deg
 import kotlinx.css.properties.rotate
-import kotlinx.css.properties.transform
+import kotlinx.html.ATarget
+import kotlinx.html.js.onClickFunction
+import kotlinx.serialization.list
+import org.w3c.dom.HTMLElement
+import org.w3c.dom.get
 import react.RBuilder
+import react.dom.InnerHTML
+import react.dom.a
 import react.dom.p
-import styled.StyledDOMBuilder
-import styled.css
-import styled.styledDiv
-import styled.styledP
+import react.setState
+import styled.*
 import kotlin.browser.document
-import kotlin.reflect.KProperty
+import kotlin.browser.window
+import kotlin.math.max
+import kotlin.math.min
 
 fun RBuilder.news(title: String, subtitle: String, content: String, imageSrc: String) {
     styledDiv {
@@ -33,8 +38,10 @@ fun RBuilder.news(title: String, subtitle: String, content: String, imageSrc: St
             gridTemplateColumns = GridTemplateColumns(2.fr, 3.fr)
             rowGap = RowGap(5.px.value)
             columnGap = ColumnGap(20.px.value)
+            //height = 100.px
+            margin(15.px, 0.px)
         }
-        imageInDiv(imageSrc, "cover") {
+        imageInDiv(imageSrc, "contain") {
             css {
                 gridArea = "image"
             }
@@ -56,18 +63,33 @@ fun RBuilder.news(title: String, subtitle: String, content: String, imageSrc: St
         }
         styledDiv {
             css {
+                overflow = Overflow.hidden
                 gridArea = "imageContent"
                 fontSize = 10.pt
             }
-            +content
+            attrs["dangerouslySetInnerHTML"] = InnerHTML(content.match("^(([^.?!])|(\\S[.?!]\\S))*[.?!]*")?.get(0)
+                ?: "")
         }
     }
 }
 
+interface MainState : PageState {
+    var news: List<NewsWithSrc>
+    var index: Int
+}
 
-class MainComponent(props: PageProps) : PageComponent<PageState>(props) {
+class MainComponent(props: PageProps) : PageComponent<MainState>(props) {
+    private val amount = 5
+
     init {
         document.title = "Земля Калевалы"
+        state.index = 0
+        state.news = listOf()
+        Request.NewsGetAll(600, 0).send(NewsWithSrc.serializer().list) {
+            setState {
+                news = it
+            }
+        }
     }
 
     override fun StyledDOMBuilder<*>.page() {
@@ -81,29 +103,54 @@ class MainComponent(props: PageProps) : PageComponent<PageState>(props) {
             styledDiv {
                 css {
                     display = Display.grid
-                    gridTemplateRows = GridTemplateRows(40.px, 1.fr, 40.px)
+                    gridTemplateRows = GridTemplateRows(40.px, auto, 40.px)
                     rowGap = RowGap(10.px.value)
+                    alignContent = Align.flexStart
                 }
-                imageInDiv((ImageDirs.design / "go-left.png").path, "contain") {
-                    css.transform.rotate(90.deg)
-                    css.opacity = 0.3
+                imageInDiv((ImageDirs.design / "go-left.png").path, "contain", height = 100.pct, width = 100.pct) {
+                    css {
+                        transform.rotate(90.deg)
+                        if (state.index > 0) {
+                            opacity = 0.6
+                            hover {
+                                opacity = 1.0
+                            }
+                            cursor = Cursor.pointer
+                        } else {
+                            opacity = 0.3
+                        }
+                    }
+                    attrs.onClickFunction = {
+                        setState { index = max(0, index - 1) }
+                    }
                 }
                 styledDiv {
                     css {
                         display = Display.grid
                         rowGap = RowGap(20.px.value)
                     }
-                    news("Земля Калевалы — 2020", "Идёт приём заявок",
-                        "На официальном сайте XIV Международного этнофестиваля ${"Земля Калевалы — 2020".quote()} идет прием заявок на участие в конкурсной и научно-деловой программе. Прими участие в крупнейшем ежегодном смотре творческих, научных, культурных и туристических достижений, посвященных прекрасной Карелии!",
-                        "/uploads/images/news/copies/2019-11-21_18-15-43-418_4p1iwvy/400x288.png")
-                    news("Районы побратимы", "",
-                        "Доброй традицией ежегодных программ Международного этнофестиваля \"Земля Калевалы\" стали перекрестные дни культуры районов-побратимов Санкт-Петербурга и Республики Карелия. В 2020 году такими районами станут: Московский район Санкт-Петербурга и Калевальский район Республики Карелия. В рамках перекрестных дней культуры, состоятся передвижные выставки, показ тематических фильмов, выступления творческих коллективов.",
-                        "/uploads/images/news/copies/2019-11-24_08-02-43-906_ihbuv9y/400x289.png")
+                    if (state.news != undefined && state.news.isNotEmpty()) {
+                        state.news.subList(max(state.index, 0), min(state.index + amount, state.news.size - 1)).forEach {
+                            news(it.news.header, "", it.news.content, it.src)
+                        }
+                    }
                 }
-                imageInDiv((ImageDirs.design / "go-left.png").path, "contain") {
-                    css.transform.rotate(270.deg)
-                    css.opacity = 0.3
-                    
+                imageInDiv((ImageDirs.design / "go-left.png").path, "contain", height = 100.pct, width = 100.pct) {
+                    css {
+                        transform.rotate(270.deg)
+                        if (state.index + amount < state.news.size - 1) {
+                            cursor = Cursor.pointer
+                            opacity = 0.6
+                            hover {
+                                opacity = 1.0
+                            }
+                        } else {
+                            opacity = 0.3
+                        }
+                    }
+                    attrs.onClickFunction = {
+                        setState { index = min(state.news.size - 1 - amount, index + 1) }
+                    }
                 }
             }
             styledDiv {
@@ -117,16 +164,72 @@ class MainComponent(props: PageProps) : PageComponent<PageState>(props) {
                         fontSize = 18.pt
                         textAlign = TextAlign.center
                     }
-                    +"Актуальная информация"
+                    +"Этнофестиваль приглашает!"
+                }
+
+                p {
+                    +"Открыта регистрация на церемонию торжественного открытия XIV Международного этнофестиваля «Земля Калевалы-2020», приуроченного к 100-летию Республики Карелия и международному дню карело-финского эпоса \"Калевала\"!"
                 }
                 p {
-                    +"Международный этнофестиваль «Земля Калевалы» проводится ежегодно с 2006 года. Название, тематическое наполнение и стилистическое решение основываются на творческом, культурном и историческом наследии карело-финского эпоса «Калевала» – литературного памятника мировой культуры, собранного и опубликованного в 1835 году Элиасом Леннротом, на основе собранных карельских и финских песен."
+                    +"Старт насыщенной фестивальной программы состоится 28 февраля (пятница) 2020 года в 12.30 в самом сердце Санкт-Петербурга - Атриуме Комендантского дома Петропавловской крепости."
                 }
                 p {
-                    +"Этнофестиваль объединяет государственные, общественные и частные организации и учреждения, творческие и научные коллективы, индивидуальных участников из северных регионов России и Республики Финляндия (геокультурного пространства Калевалы – эпической страны, в которой живут и действуют герои эпоса)."
+                    +"Искусство и культура Карелии станет еще ближе гостям этнофестиваля благодаря интерактивным программам и мастер-классам по народным ремёслам.Состоится награждение лауреатов Этнофестиваля, выступления лучших творческих коллективов Республики Карелия, презентация выставочной и научно-деловой программы."
                 }
                 p {
-                    +"Старт конкурсной программы Этнофестиваля традиционно объявляется в сентябре текущего года, финал и награждение победителей – 28 февраля, в международный день Калевалы."
+                    +"Гостями Этнофестиваля в Санкт-Петербурге станут более 200 творческих лидеров из Карелии, представители государств Скандинавии и Балтии. Ожидается участие официальных лиц Правительства Республики Карелия и Санкт-Петербурга."
+                }
+                styledA(target = ATarget.blank, href = "https://docs.google.com/forms/d/e/1FAIpQLSfCdvp2YVQAlZnIHZjNpPu3QvzH8R80h05CePopy6d3Z6Zm5g/viewform?vc=0&c=0&w=1") {
+                    css {
+                        textAlign = TextAlign.center
+                    }
+                    styledButton {
+                        css {
+                            backgroundColor = Color("#ffddaa")
+                            color = kalevalaRedColor
+                            fontSize = 25.pt
+                            padding(20.px)
+                        }
+                        +"Онлайн-регистрация на церемонию"
+                    }
+                }
+                p {
+                    +"Для участия в конкурсной и научно-деловой программе Этнофестиваля достаточно:"
+
+                }
+                indentedDiv {
+                    css {
+                        margin(2.px, 0.px)
+                    }
+                    +"выбрать в разделе "
+                    a(href = Pages.main.path) {
+                        attrs.onClickFunction = { e ->
+                            e.preventDefault()
+                            window.scrollTo(0.0, 0.0)
+                            document.getElementsByClassName("h-join")[0]?.let { hJoin ->
+                                animate(3000.0, arcTiming.inOut()) {
+                                    (hJoin as HTMLElement).style.backgroundColor =
+                                        getPageColor(Pages.join, false)
+                                            .mix(RGBA(255, 230, 180), it)
+                                            .toColor().value
+                                }
+                            }
+                        }
+                        +"\"Принять участие\""
+                    }
+                    +" интересующий конкурс или раздел научно-деловой программы"
+                }
+                indentedDiv {
+                    css {
+                        margin(2.px, 0.px)
+                    }
+                    +"заполнить простую анкету и приложить работу."
+                }
+                styledImg(src = "https://sun9-24.userapi.com/c206728/v206728626/54d7a/R7LVg36Joec.jpg") {
+                    css {
+                        marginTop = 10.px
+                        width = 100.pct
+                    }
                 }
             }
         }
