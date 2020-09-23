@@ -80,9 +80,9 @@ fun RBuilder.getSunCountryContestInfo(aOfficial: ContestA, aJoin: ContestA) {
     indentedDiv {
         +"Куратор Конкурса: "
         b {
-            +"Горшенина Таисия Тимофеевна"
+            +"Скрынник Максим Анатольевич"
         }
-        +", e-mail: tasicoshka53@gmail.com, м.т.: +7-911-020-44-16;"
+        +", e-mail: ma.1s@yandex.ru, м.т.: +7-999-800-19-87;"
     }
 
     indentedDiv {

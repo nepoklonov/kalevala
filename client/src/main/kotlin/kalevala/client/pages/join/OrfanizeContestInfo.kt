@@ -3,6 +3,7 @@ package kalevala.client.pages.join
 import kalevala.client.indentedDiv
 import kalevala.client.redH3
 import react.RBuilder
+import react.dom.b
 import react.dom.h3
 import react.dom.p
 
@@ -27,5 +28,24 @@ fun RBuilder.getOrganizeContestInfo() {
     }
     indentedDiv {
         +"благодарственное письмо этнофестиваля на учреждение и куратора площадки"
+    }
+
+    redH3 {
+        +"Есть вопрос?"
+    }
+    indentedDiv {
+        +"Контакт: "
+        b {
+            +"Суворова Виктория Николаевна"
+        }
+        +", куратор региональной программы Международного этнофестиваля \"Земля Калевалы\", e-mail: gilt@mail.ru, м.т.: +7-967-103-70-58;"
+    }
+
+    indentedDiv {
+        +"Автор и руководитель Международного этнофестиваля «Земля Калевалы»"
+        b {
+            +"Головачев Владимир Сергеевич"
+        }
+        +", e-mail: vladgolovachev@yandex.ru, м.т.: +7-916-557-12-55"
     }
 }

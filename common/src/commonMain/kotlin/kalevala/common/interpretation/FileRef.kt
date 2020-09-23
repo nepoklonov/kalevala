@@ -99,8 +99,8 @@ object ImageDirs {
     val commonwealth = images / "commonwealth"
 
     fun getPoster(current: String): String? {
-        return if (current == Pages.Join.organize.path) null
-        else (join file (DirRef(current) from Pages.join) dot "jpg").path
+        return (join file (DirRef(current) from Pages.join) dot "jpg").path//if (current == Pages.Join.organize.path) null
+        /*else*/
     }
 
     fun getImageFromDirectory(dir: DirRef, fileRef: FileRef): Image<*> {

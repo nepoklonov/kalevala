@@ -71,9 +71,9 @@ fun RBuilder.getFacesContestInfo(aOfficial: ContestA, aJoin: ContestA) {
     indentedDiv {
         +"Куратор Конкурса: "
         b {
-            +"Юшко Антон Алексеевич"
+            +"Симкина Ирина Сергеевна"
         }
-        +", председатель комиссии экоэффективного туризма Ленинградского областного отделения Русского Географического Общества, e-mail: yushko.an@gmail.com, м.т.: +7-921-900-96-56"
+        +", e-mail: rnsimkina@gmail.com, м.т.: +7-964-391-93-50;"
     }
 
     indentedDiv {

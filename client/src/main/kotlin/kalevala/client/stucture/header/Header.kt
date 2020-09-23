@@ -29,12 +29,12 @@ import styled.styledSpan
 import kotlin.browser.window
 import kotlin.js.Date
 
-val DAY_OF_THE_END = Date.UTC(2020, 1, 28).toLong()
-val DAY_OF_THE_STOP = Date.UTC(2020, 1, 20).toLong()
+val DAY_OF_THE_END = Date.UTC(2021, 1, 10).toLong()
+val DAY_OF_THE_STOP = Date.UTC(2021, 1, 10).toLong()
 const val msInDay = 1000 * 3600 * 24
 
-//fun getDaysLeft() = (DAY_OF_THE_END / msInDay - Date.now().toLong() / msInDay).toInt()
-//fun getAccessDaysLeft() = (DAY_OF_THE_STOP / msInDay - Date.now().toLong() / msInDay).toInt()
+fun getDaysLeft() = (DAY_OF_THE_END / msInDay - Date.now().toLong() / msInDay).toInt()
+fun getAccessDaysLeft() = (DAY_OF_THE_STOP / msInDay - Date.now().toLong() / msInDay).toInt()
 
 fun RBuilder.headerInfo(amount: Int, one: String, two: String, five: String) {
     styledDiv {
@@ -137,32 +137,32 @@ class HeaderComponent : RComponent<RoutedProps, HeaderState>() {
                         fontSize = 24.px
                         marginTop = 15.px
                     }
-//                    headerInfo(getDaysLeft(), "день\nдо финала", "дня\nдо финала", "дней\nдо финала")
+                    headerInfo(getDaysLeft(), "день\nдо финала", "дня\nдо финала", "дней\nдо финала")
 //                    headerInfo(getAccessDaysLeft(), "день до завершения\n приёма работ", "дня до завершения\n" +
 //                        " приёма работ", "дней до завершения\n" +
 //                        " приёма работ")
 
-                    styledDiv {
-                        css {
-                            margin(0.px, 0.px, 0.px, 30.px)
-                            fontSize = 14.px
-                            display = Display.inlineFlex
-                            alignItems = Align.flexEnd
+//                    styledDiv {
+//                        css {
+//                            margin(0.px, 0.px, 0.px, 30.px)
+//                            fontSize = 14.px
+//                            display = Display.inlineFlex
+//                            alignItems = Align.flexEnd
+//
+//                        }
+//                        styledSpan {
+//                            css {
+//                                fontWeight = FontWeight.bold
+//                                marginBottom = 6.px
+//                            }
+//                            "Этнофестиваль\nзавершён".toUpperCase().split('\n').forEach {
+//                                +it
+//                                br { }
+//                            }
+//                        }
+//                    }
 
-                        }
-                        styledSpan {
-                            css {
-                                fontWeight = FontWeight.bold
-                                marginBottom = 6.px
-                            }
-                            "Этнофестиваль\nзавершён".toUpperCase().split('\n').forEach {
-                                +it
-                                br { }
-                            }
-                        }
-                    }
-
-                    headerInfo(state.participantsAmount + 700, "участник", "участника", "участников")
+                    headerInfo(state.participantsAmount + 0, "участник", "участника", "участников")
                     headerInfo(state.citiesAmount, "населённый\nпункт", "населённых\nпункта", "населённых\nпунктов")
                 }
             }

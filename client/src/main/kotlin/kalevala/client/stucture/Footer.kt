@@ -91,7 +91,7 @@ class FooterComponent : RComponent<RProps, YamlState<Partners>>() {
                     padding(20.px, 0.px)
                     textAlign = TextAlign.center
                 }
-                +"© ${General.ruTitle.quote()}, 2019. Полное или частичное копирование материалов сайта запрещено"
+                +"© ${General.ruTitle.quote()}, 2019-2020. Полное или частичное копирование материалов сайта запрещено"
                 +", при согласованном копировании ссылка на ресурс обязательна."
             }
         }
