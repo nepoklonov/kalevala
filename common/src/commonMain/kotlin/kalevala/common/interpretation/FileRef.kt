@@ -172,6 +172,8 @@ object Pages {
         val faces = gallery / "faces"
         val sunCountry = gallery / "sun-country"
         val ethnoMotive = gallery / "ethno-motive"
+//        val scientific = gallery / "scientific"
+//        val organize = gallery / "organize"
     }
 
     val karelia = root / "karelia"

@@ -54,11 +54,13 @@ class Section(val self: PageInfo, val pages: List<PageInfo>) {
             PageInfo(Pages.Join.scientific, "Научно-деловая программа", JoinComponent::class),
             PageInfo(Pages.Join.organize, "Организовать площадку этнофестиваля", JoinComponent::class)
         )
-        val Gallery = Section(Pages.gallery, "Работы участников", GalleryComponent::class,
+        val Gallery = Section(Pages.gallery, "Участники", GalleryComponent::class,
             PageInfo(Pages.Gallery.sunCountry, "Конкурс детского творчества «Калевала — страна солнца»", GalleryComponent::class),
             PageInfo(Pages.Gallery.faces, "Фотоконкурс «Лики земли Карельской»", GalleryComponent::class),
             PageInfo(Pages.Gallery.ethnoMotive, "Конкурс дизайна «ЭТНОмотив»", GalleryComponent::class),
             PageInfo(Pages.Gallery.ethnoTour, "Конкурс представителей туриндустрии «ЭТНОтур»", AntiGallery::class)
+//            PageInfo(Pages.Gallery.scientific, "Научно-деловая программа»", AntiGallery::class),
+//            PageInfo(Pages.Gallery.organize, "Параллельная программа", AntiGallery::class)
         )
         val Karelia = Section(Pages.karelia, "О Карелии", AboutComponent::class,
             PageInfo(Pages.Karelia.common, "Общие сведения", CommonComponent::class),

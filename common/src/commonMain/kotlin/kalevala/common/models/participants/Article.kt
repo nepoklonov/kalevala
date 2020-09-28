@@ -17,6 +17,22 @@ data class ArticleParticipant(
     @Display(107, "Должность", width = 45)
     val job: String,
 
+    @Display(210, "Выберите разделы", displayType = DisplayType.Label, validation = Validation.Any)
+    val sections: Unit,
+
+        //Make Multi!
+    @SaveToTable
+    @Display(211, "Раздел 1 «Земля Калевалы. Туристические объекты и развитие территорий»", displayType = DisplayType.CheckBox, validation = Validation.AnyCheckBox)
+    val sectionFirst: Boolean,
+
+    @SaveToTable
+    @Display(212, "Раздел 2 «Земля Калевалы. Историко-культурный потенциал территорий»", displayType = DisplayType.CheckBox, validation = Validation.AnyCheckBox)
+    val sectionSecond: Boolean,
+
+    @SaveToTable
+    @Display(213, "Раздел 3 «Земля Калевалы. Образ Карелии в искусстве, науке и образовании»", displayType = DisplayType.CheckBox, validation = Validation.AnyCheckBox)
+    val sectionThird: Boolean,
+
     @SaveToTable
     @Display(214, "Приложить файл с текстом статьи",
         displayType = DisplayType.File, validation = Validation.EssayFileName,
