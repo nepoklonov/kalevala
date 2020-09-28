@@ -14,6 +14,7 @@ import kalevala.server.api.respond
 import kalevala.server.database.addForm
 import kalevala.server.database.getModelTable
 import kalevala.server.database.loggedTransaction
+import kalevala.server.sendCertificate
 import kotlinx.serialization.Mapper
 import org.jetbrains.exposed.sql.deleteWhere
 import kotlin.reflect.KClass
@@ -24,7 +25,12 @@ private fun InputField.isValid() = validation.validate(value)
 private fun InputField.isValidIfExpected(allFields: Map<String, InputField>) = isValid() || !isExpected(allFields)
 
 fun parseForm(allFields: List<InputField>, formType: FormType, id: Int? = null): AnyForm? {
+    println("koshka")
+    println(allFields.toString())
+    println(allFields.filter { field -> !field.isValidIfExpected(allFields.map { it.name to it }.toMap()) })
     return if (allFields.all { field -> field.isValidIfExpected(allFields.map { it.name to it }.toMap()) }) {
+        println("sobaka")
+        println(id)
         val formKlass = formType.klass
         val map = allFields.map { it.name to it.value }.toMap().toMutableMap()
         map["id"] = id?.toString() ?: "0"
@@ -56,22 +62,20 @@ fun Route.startFormSendAPI() = listen<Request.FormSend>(Method.FormSend) { reque
                 m::class.getModelTable().deleteWhere { m::class.getModelTable()[AnyForm::id] eq request.id!! }
             }
         }
-        if (m is Participant) respond(Answer.wrong("something is wrong")) else {
-            if (request.formType == FormType.Admin) {
-                respond(adminLogin(m as AdminLogin))
+        if (request.formType == FormType.Admin) {
+            respond(adminLogin(m as AdminLogin))
+        } else {
+            if (addForm(m, m::class) == "ok") {
+                respond(Answer.ok("ok"))
+                print(m.id)
+                print(m.time)
+                if (m is Participant) sendCertificate(m, m::class)
             } else {
-                if (addForm(m, m::class) == "ok") {
-                    respond(Answer.ok("ok"))
-                    print(m.id)
-                    print(m.time)
-                    //                if (m is Participant) sendCertificate(m, m::class)
-                } else {
-                    respond(Answer.wrong("wtf"))
-                }
+                respond(Answer.wrong("wtf"))
             }
         }
     } else {
-        respond(Answer.wrong("something is wrong"))
+        respond(Answer.wrong("something is so wrong"))
     }
     //TODO check that file was uploaded
 }

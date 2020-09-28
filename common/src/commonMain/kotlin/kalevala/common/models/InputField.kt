@@ -19,6 +19,7 @@ data class InputField(
     var value: String = ""
 ) {
     init {
-        if (type == DisplayType.CheckBox) value = "false"
+        if (type == DisplayType.CheckBox &&
+            value != "true") value = "false"
     }
 }
