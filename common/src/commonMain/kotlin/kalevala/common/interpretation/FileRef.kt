@@ -135,6 +135,7 @@ object Images {
 object SVGImages {
     val mainLogo = SVGImage(ImageDirs.design file "main-logo.svg")
     val mainTitle = SVGImage(ImageDirs.design file "title.svg")
+    val fifteenyears = SVGImage(ImageDirs.design file "fifteenyears.svg")
 }
 
 object Pages {

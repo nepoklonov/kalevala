@@ -127,6 +127,14 @@ class HeaderComponent : RComponent<RoutedProps, HeaderState>() {
             styledDiv {
                 css {
                     display = Display.flex
+                    justifyContent = JustifyContent.spaceBetween
+                    alignItems = Align.center
+                }
+                svgImage(SVGImages.fifteenyears, 244 x 80)
+            }
+            styledDiv {
+                css {
+                    display = Display.flex
                     flexDirection = FlexDirection.column
                     alignItems = Align.flexEnd
                 }
