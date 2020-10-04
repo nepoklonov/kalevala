@@ -14,7 +14,7 @@ data class News(
     val header: String,
 
     @SaveToTable(longText = true)
-    @Display(104, "Текст новости", displayType = DisplayType.HTML)
+    @Display(104, "Текст новости", displayType = DisplayType.HTML, validation = Validation.LongText)
     val content: String,
 
     @SaveToTable
