@@ -28,7 +28,7 @@ class Conception(props: PageProps) : StaticPage(props) {
                 css {
                     marginBottom = 20.px
                 }
-                +"Скачать «Концепцию этнофестиваля \"Земля Калевалы — 2020\".pdf»"
+                +"Скачать «Концепцию этнофестиваля \"Земля Калевалы — 2021\".pdf»"
             }
             redH3 {
                 +"Краткое описание"

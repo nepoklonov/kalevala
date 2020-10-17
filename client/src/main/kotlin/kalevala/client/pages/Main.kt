@@ -22,6 +22,7 @@ import react.RBuilder
 import react.dom.InnerHTML
 import react.dom.a
 import react.dom.p
+import react.router.dom.navLink
 import react.setState
 import styled.*
 import kotlin.browser.document
@@ -38,7 +39,7 @@ fun RBuilder.news(title: String, subtitle: String, content: String, imageSrc: St
             gridTemplateColumns = GridTemplateColumns(2.fr, 3.fr)
             rowGap = RowGap(5.px.value)
             columnGap = ColumnGap(20.px.value)
-            //height = 100.px
+            height = 200.px
             margin(15.px, 0.px)
         }
         imageInDiv(imageSrc, "contain") {
@@ -48,27 +49,38 @@ fun RBuilder.news(title: String, subtitle: String, content: String, imageSrc: St
         }
         styledDiv {
             css {
+                children("a") {
+                    +MainStyles.normalA
+                }
                 gridArea = "title"
                 fontWeight = FontWeight.bold
             }
-            +title
-        }
-        styledDiv {
-            css {
-                gridArea = "subtitle"
-                fontSize = 12.pt
-                color = gray70Color
+            navLink(Pages.About.news.path) {
+                +title
             }
-            +subtitle
         }
+//        styledDiv {
+//            css {
+//                gridArea = "subtitle"
+//                fontSize = 12.pt
+//                color = gray70Color
+//                children("a") {
+//                    +MainStyles.normalA
+//                }
+//            }
+//            navLink(Pages.About.news.path) {
+//                +subtitle
+//            }
+//        }
         styledDiv {
             css {
                 overflow = Overflow.hidden
-                gridArea = "imageContent"
+                gridArea = "subtitle"//""imageContent"
                 fontSize = 10.pt
+                margin(10.px, 0.px)
             }
-            attrs["dangerouslySetInnerHTML"] = InnerHTML(content.match("^(([^.?!])|(\\S[.?!]\\S))*[.?!]*")?.get(0)
-                ?: "")
+            attrs["dangerouslySetInnerHTML"] = InnerHTML(content.substring(0,300)+ content.substring(300).match("^(([^.?!])|(\\S[.?!]\\S))*[.?!]*")?.get(0)
+                    ?: "")
         }
     }
 }
@@ -159,6 +171,12 @@ class MainComponent(props: PageProps) : PageComponent<MainState>(props) {
                     rowGap = RowGap(15.px.value)
                     height = LinearDimension.fitContent
                 }
+                styledImg(src = "https://sun9-22.userapi.com/2ZScfcFh2klmsdnlO7pcfCdB4rmb3ms_6tqk5A/aWXSA9GaApo.jpg") {
+                    css {
+                        marginTop = 10.px
+                        width = 100.pct
+                    }
+                }
                 styledP {
                     css {
                         fontSize = 18.pt
@@ -241,12 +259,6 @@ class MainComponent(props: PageProps) : PageComponent<MainState>(props) {
                         margin(2.px, 0.px)
                     }
                     +"заполнить простую анкету и приложить работу."
-                }
-                styledImg(src = "https://sun9-61.userapi.com/oqGLjke0fZyLU3WSHAkRdJU95n2b77KtorMEyg/12B5kUc2b6g.jpg") {
-                    css {
-                        marginTop = 10.px
-                        width = 100.pct
-                    }
                 }
             }
         }

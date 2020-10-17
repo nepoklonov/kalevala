@@ -31,9 +31,9 @@ interface HNavState : RState {
 
 class HNavElement : RComponent<HNavProps, HNavState>() {
     private val isMain
-        get() = props.current == Section.Main.url
+        get() = false //props.current == Section.Main.url
     private val shouldBeOpened
-        get() = state.selected || isMain
+        get() = state.selected //|| isMain
 
     init {
         state.selected = false
