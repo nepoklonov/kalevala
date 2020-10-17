@@ -1,10 +1,6 @@
 package kalevala.server.api
 
-import io.ktor.application.call
 import io.ktor.routing.Route
-import io.ktor.sessions.get
-import io.ktor.sessions.sessions
-import io.ktor.sessions.set
 import kalevala.common.*
 import kalevala.common.interpretation.ImageDirs
 import kalevala.common.interpretation.ScaleType
@@ -35,8 +31,8 @@ fun Route.startImagesGetOriginalAPI() = listenAndAutoRespond<Request.Participant
     Answer.ok(getOriginal(request.fileIndex))
 }
 
-fun Route.startEthnoTourGetAllAPI() = listenAndAutoRespond<Request.ParticipantsEthnoToutGetAll>(Method.ParticipantsEthnoTourGetAll) { _, _ ->
-    Answer.ok(String.serializer().list, ethnoTourGetAll())
+fun Route.startEthnoTourGetAllAPI() = listenAndAutoRespond<Request.ParticipantsOpenDataGetAll>(Method.ParticipantsOpenDataGetAll) { request, _ ->
+    Answer.ok(String.serializer().list, openDataGetAll(request.formType))
 }
 
 fun Route.startAboutPhotosAPI() = listenAndAutoRespond<Request.AboutGetPhotos>(Method.AboutGetPhotos) { _, _ ->

@@ -176,15 +176,15 @@ fun getOriginal(fileId: Int): String {
 }
 
 
-fun ethnoTourGetAll(): List<String> {
+fun openDataGetAll(formType: FormType): List<String> {
     return transaction {
         addLogger(StdOutSqlLogger)
-        val participantTable = EthnoTourParticipant::class.getModelTable()
+        val participantTable = formType.klass.getModelTable()
         participantTable.selectAll().orderBy(participantTable.get<Int>("id"), SortOrder.DESC).mapNotNull { participant ->
             participant[participantTable.get<String>("surname")] + " " +
                 participant[participantTable.get<String>("name")] + " " +
                 participant[participantTable.get<String>("patronymic")] + ", " +
-                participant[participantTable.get<String>("city")] + " "
+                participant[participantTable.get<String>(if(formType == FormType.Organize) "actionCity" else "city")] + " "
         }
     }
 }

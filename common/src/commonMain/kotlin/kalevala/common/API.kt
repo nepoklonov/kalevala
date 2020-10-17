@@ -21,7 +21,7 @@ enum class Method(val methodName: String, val fileTransfer: Boolean = false) {
     ParticipantsImagesGetInfo("api/participants/images/get-info"),
     ParticipantsImagesGetVersion("api/participants/images/get-version"),
     ParticipantsImagesGetOriginal("api/participants/images/get-original"),
-    ParticipantsEthnoTourGetAll("api/participants/ethno-tour/get-all"),
+    ParticipantsOpenDataGetAll("api/participants/open-data/get-all"),
     GetGeneralInfo("api/get-general-info"),
     AboutGetPhotos("api/about/get-photos"),
     NewsGetAll("api/news/get-all"),
@@ -81,7 +81,7 @@ sealed class Request(val method: Method) {
         Request(Method.ParticipantsImagesGetOriginal)
 
     @Serializable
-    class ParticipantsEthnoToutGetAll : Request(Method.ParticipantsEthnoTourGetAll)
+    class ParticipantsOpenDataGetAll(val formType: FormType) : Request(Method.ParticipantsOpenDataGetAll)
 
     @Serializable
     class FileUpload(val formType: FormType, val filesData: List<FileData>) : Request(Method.FileUpload) {

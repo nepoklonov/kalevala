@@ -58,7 +58,9 @@ class Section(val self: PageInfo, val pages: List<PageInfo>) {
             PageInfo(Pages.Gallery.sunCountry, "Конкурс детского творчества «Калевала — страна солнца»", GalleryComponent::class),
             PageInfo(Pages.Gallery.faces, "Фотоконкурс «Лики земли Карельской»", GalleryComponent::class),
             PageInfo(Pages.Gallery.ethnoMotive, "Конкурс дизайна «ЭТНОмотив»", GalleryComponent::class),
-            PageInfo(Pages.Gallery.ethnoTour, "Конкурс представителей туриндустрии «ЭТНОтур»", AntiGallery::class)
+            PageInfo(Pages.Gallery.ethnoTour, "Конкурс представителей туриндустрии «ЭТНОтур»", AntiGallery::class),
+            PageInfo(Pages.Gallery.scientific, "Научно-деловая программа", AntiGallery::class),
+            PageInfo(Pages.Gallery.organize, "Организация площадок этнофестиваля", AntiGallery::class)
         )
         val Karelia = Section(Pages.karelia, "О Карелии", AboutComponent::class,
             PageInfo(Pages.Karelia.common, "Общие сведения", CommonComponent::class),

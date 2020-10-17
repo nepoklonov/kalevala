@@ -25,12 +25,7 @@ private fun InputField.isValid() = validation.validate(value)
 private fun InputField.isValidIfExpected(allFields: Map<String, InputField>) = isValid() || !isExpected(allFields)
 
 fun parseForm(allFields: List<InputField>, formType: FormType, id: Int? = null): AnyForm? {
-    println("koshka")
-    println(allFields.toString())
-    println(allFields.filter { field -> !field.isValidIfExpected(allFields.map { it.name to it }.toMap()) })
     return if (allFields.all { field -> field.isValidIfExpected(allFields.map { it.name to it }.toMap()) }) {
-        println("sobaka")
-        println(id)
         val formKlass = formType.klass
         val map = allFields.map { it.name to it.value }.toMap().toMutableMap()
         map["id"] = id?.toString() ?: "0"
