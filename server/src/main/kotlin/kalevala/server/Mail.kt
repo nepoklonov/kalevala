@@ -50,7 +50,7 @@ fun sendCertificate(m: Participant, mClass: KClass<out AnyForm>) {
     val message = MimeMessage(mailSession)
     message.setFrom(InternetAddress("kalevfest@yandex.ru"))
     message.setRecipients(Message.RecipientType.TO, email.trim().toLowerCase())
-    message.setSubject("Сертификат участника", "UTF-8")
+    message.setSubject("Подтверждение участия", "UTF-8")
     val mp = MimeMultipart()
 
     val mbpText = MimeBodyPart()
