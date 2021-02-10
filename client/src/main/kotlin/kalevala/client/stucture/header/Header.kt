@@ -29,8 +29,8 @@ import styled.styledSpan
 import kotlin.browser.window
 import kotlin.js.Date
 
-val DAY_OF_THE_END = Date.UTC(2021, 1, 10).toLong()
-val DAY_OF_THE_STOP = Date.UTC(2021, 1, 10).toLong()
+val DAY_OF_THE_END = Date.UTC(2021, 8, 1).toLong()
+val DAY_OF_THE_STOP = Date.UTC(2021, 8, 1).toLong()
 const val msInDay = 1000 * 3600 * 24
 
 fun getDaysLeft() = (DAY_OF_THE_END / msInDay - Date.now().toLong() / msInDay).toInt()
@@ -170,7 +170,7 @@ class HeaderComponent : RComponent<RoutedProps, HeaderState>() {
 //                        }
 //                    }
 
-                    headerInfo(state.participantsAmount + 0, "участник", "участника", "участников")
+                    headerInfo(state.participantsAmount + 500, "участник", "участника", "участников")
                     headerInfo(state.citiesAmount, "населённый\nпункт", "населённых\nпункта", "населённых\nпунктов")
                 }
             }
