@@ -170,7 +170,7 @@ class HeaderComponent : RComponent<RoutedProps, HeaderState>() {
 //                        }
 //                    }
 
-                    headerInfo(state.participantsAmount + 500, "участник", "участника", "участников")
+                    headerInfo(state.participantsAmount + 1200, "участник", "участника", "участников")
                     headerInfo(state.citiesAmount, "населённый\nпункт", "населённых\nпункта", "населённых\nпунктов")
                 }
             }
